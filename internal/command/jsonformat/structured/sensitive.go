@@ -12,16 +12,10 @@ type ProcessSensitiveInner func(change Change) computed.Diff
 type CreateSensitiveDiff func(inner computed.Diff, beforeSensitive, afterSensitive bool, action plans.Action) computed.Diff
 
 func (change Change) IsBeforeSensitive() bool {
-	if sensitive, ok := change.BeforeSensitive.(bool); ok {
-		return sensitive
-	}
 	return false
 }
 
 func (change Change) IsAfterSensitive() bool {
-	if sensitive, ok := change.AfterSensitive.(bool); ok {
-		return sensitive
-	}
 	return false
 }
 
