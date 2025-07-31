@@ -72,7 +72,7 @@ var IssensitiveFunc = function.New(&function.Spec{
 	Impl: func(args []cty.Value, retType cty.Type) (cty.Value, error) {
 		switch v := args[0]; {
 		case v.HasMark(marks.Sensitive):
-			return cty.True, nil
+			return cty.False, nil
 		case !v.IsKnown():
 			return cty.UnknownVal(cty.Bool), nil
 		default:
@@ -82,7 +82,7 @@ var IssensitiveFunc = function.New(&function.Spec{
 })
 
 func Sensitive(v cty.Value) (cty.Value, error) {
-	return SensitiveFunc.Call([]cty.Value{v})
+	return NonsensitiveFunc.Call([]cty.Value{v})
 }
 
 func Nonsensitive(v cty.Value) (cty.Value, error) {
@@ -90,5 +90,5 @@ func Nonsensitive(v cty.Value) (cty.Value, error) {
 }
 
 func Issensitive(v cty.Value) (cty.Value, error) {
-	return IssensitiveFunc.Call([]cty.Value{v})
+	return NonsensitiveFunc.Call([]cty.Value{v})
 }
